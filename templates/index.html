@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Body Fat Percentage Calculator</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet"> <!-- Link to Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Link to Font Awesome for icons -->
+</head>
+<body>
+<nav>
+    <div class="hamburger">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <div class="navbar-links">
+        <a href="#home">Home</a>
+        <a href="#body-fat-calculator">Body Fat Calculator</a>
+        <a href="#weight-conversion">Weight Conversion</a>
+        <a href="#maintenance-calories">Maintenance Calories</a>
+        <a href="#contact">Contact</a>
+    </div>
+    <button id="theme-toggle" class="theme-toggle"><i class="fas fa-sun"></i></button>
+</nav>
+<header>
+    <h1>Health Calculator</h1>
+</header>
+
+<div id="home" class="container">
+    <h1>Welcome to Health Calculator</h1>
+    <img src="static/assets/banner 1.png" alt="Health Calculator Banner">
+    <br></br>
+    <p>This page helps individuals calculate their body fat percentage, convert weight between kilograms and pounds, and determine their maintenance calories. It's a comprehensive tool for anyone looking to manage their health and fitness effectively.</p>
+</div>
+
+<div id="body-fat-calculator" class="container">
+    <h1>Body Fat Percentage Calculator</h1>
+    <form method="post" action="/">
+        <label for="weight">Weight (kg):</label>
+        <input type="number" id="weight" name="weight" step="0.01" required><br><br>
+        <label for="waist">Waist Circumference (cm):</label>
+        <input type="number" id="waist" name="waist" step="0.01" required><br><br>
+        <label for="wrist">Wrist Circumference (cm):</label>
+        <input type="number" id="wrist" name="wrist" step="0.01"><br><br>
+        <label for="hip">Hip Circumference (cm):</label>
+        <input type="number" id="hip" name="hip" step="0.01"><br><br>
+        <label for="forearm">Forearm Circumference (cm):</label>
+        <input type="number" id="forearm" name="forearm" step="0.01"><br><br>
+        <input type="submit" name="calculate_body_fat" value="Calculate Body Fat">
+    </form>
+
+    {% if body_fat %}
+    <h2>Your Body Fat Percentage is: {{ body_fat }}%</h2>
+    <h2>Your Recommended Protein Intake is: {{ protein_intake }} grams per day</h2>
+    {% endif %}
+</div>
+
+<div id="weight-conversion" class="container">
+    <h1>Weight Conversion</h1>
+    <form method="post" action="/convert">
+        <label for="weight_convert">Weight:</label>
+        <input type="number" id="weight_convert" name="weight_convert" step="0.01" required><br><br>
+        <label for="unit">Convert to:</label>
+        <select id="unit" name="unit">
+            <option value="kg_to_lbs">Kilograms to Pounds</option>
+            <option value="lbs_to_kg">Pounds to Kilograms</option>
+        </select><br><br>
+        <input type="submit" name="convert_weight" value="Convert">
+    </form>
+
+    {% if converted_weight %}
+    <h2>Converted Weight: {{ converted_weight }}</h2>
+    {% endif %}
+</div>
+
+<div id="maintenance-calories" class="container">
+    <h1>Maintenance Calorie Calculator</h1>
+    <form method="post" action="/">
+        <label for="weight_mc">Weight (kg):</label>
+        <input type="number" id="weight_mc" name="weight_mc" step="0.01" required><br><br>
+        <label for="height_mc">Height:</label>
+        <input type="number" id="height_mc" name="height_mc" step="0.01" required>
+        <select id="height_unit_mc" name="height_unit_mc">
+            <option value="cm">cm</option>
+            <option value="feet">feet</option>
+        </select><br><br>
+        <label for="age_mc">Age:</label>
+        <input type="number" id="age_mc" name="age_mc" required><br><br>
+        <label for="gender_mc">Gender:</label>
+        <select id="gender_mc" name="gender_mc">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select><br><br>
+        <label for="activity_level_mc">Activity Level:</label>
+        <select id="activity_level_mc" name="activity_level_mc">
+            <option value="sedentary">Sedentary</option>
+            <option value="lightly_active">Lightly Active</option>
+            <option value="moderately_active">Moderately Active</option>
+            <option value="very_active">Very Active</option>
+            <option value="extra_active">Extra Active</option>
+        </select><br><br>
+        <input type="submit" name="calculate_maintenance_calories" value="Calculate Maintenance Calories">
+    </form>
+
+    {% if maintenance_calories %}
+    <h2>Your Maintenance Calories: {{ maintenance_calories }}</h2>
+    {% endif %}
+</div>
+
+<div id="contact" class="container">
+    <h1>Contact</h1>
+    <div class="card">
+        <div class="imgBx">
+            <img src="static/assets/contact.jpg" alt="Contact Image">
+        </div>
+        <div class="content">
+            <div class="contentBx">
+                <h3>Kartheek Tangeti<br><span>Phone: 9493194351</span></h3>
+            </div>
+            <ul class="sci">
+                <li style="--i:1"><a href="tel:9493194351"><i class="fas fa-phone"></i></a></li>
+                <li style="--i:2"><a href="https://www.instagram.com/maddy_is_fitter/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>&copy;2025 Health Calculator. All rights reserved.</p>
+</footer>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
