@@ -97,4 +97,4 @@ def convert():
     return render_template('index.html', converted_weight=converted_weight)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
